@@ -9,10 +9,19 @@ public class Recurso {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column(length = 1024)
     private String titulo;
+
+    @Column(length = 4096)
     private String descricao;
+
     private String dataCriacao;
+
     private String dataRegistro;
+
+    public Recurso() {
+    }
 
     public Recurso(String titulo, String descricao, String dataCriacao, String dataRegistro) {
         this.titulo = titulo;
@@ -20,6 +29,7 @@ public class Recurso {
         this.dataCriacao = dataCriacao;
         this.dataRegistro = dataRegistro;
     }
+
 
     public String getTitulo() {
         return titulo;

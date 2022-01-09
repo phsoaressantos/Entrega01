@@ -13,14 +13,18 @@ public class EducacionalApplication {
     }
 
     @Bean
-    public CommandLineRunner run (RecursoRepository repository){
-        return (args -> {
-         insertJavaAdvocates(repository);
-         System.out.println(repository.findAll());
-        });
+    public CommandLineRunner run(RecursoRepository repository) {
+        return args -> {
+            insertJavaAdvocates(repository);
+            System.out.println(repository);
+            System.out.println(repository.findAll());
+        };
     }
 
-    private void insertJavaAdvocates(RecursoRepository repository){
-        repository.save(new Recurso("Teste","Descricao do recurso", "02122021","data"));
+    private void insertJavaAdvocates(RecursoRepository repository) {
+        repository.save(new Recurso("Teste", "Descricao do recurso", "02122021", "data"));
+        repository.save(new Recurso("Teste2", "Aqui adiciona descricao", "dta", "data3"));
     }
+
 }
+
