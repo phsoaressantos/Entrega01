@@ -2,6 +2,8 @@ package com.example.educacional;
 
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 
@@ -18,12 +20,22 @@ public class Colecao {
     @Column(length = 4096)
     private String descricao;
 
+    // uma colecao possui uma lista ordenada de recursos
+    private List<Recurso> recursos = new List<Recurso>() {
+    };
+
     public Colecao() {
     }
 
     public Colecao(String titulo, String descricao) {
         this.titulo = titulo;
         this.descricao = descricao;
+    }
+
+    public Colecao(String titulo, String descricao, List<Recurso> recursos) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.recursos = recursos;
     }
 
     public Long getId() {

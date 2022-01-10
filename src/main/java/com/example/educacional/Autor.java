@@ -27,8 +27,11 @@ public class Autor {
     @Column(length = 20)
     private String orcid;
 
+
+
     public Autor() {
     }
+
 
     public Autor(String email, String nome, String sobrenome, String afiliacao, String orcid) {
 

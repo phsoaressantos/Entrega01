@@ -1,6 +1,9 @@
 package com.example.educacional;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 
@@ -23,13 +26,20 @@ public class Recurso {
     public Recurso() {
     }
 
+    // um recurso possui uma lista ordenada de autores
+    private List<Autor> autores = new List<Autor>() {
+    };
+
+
+    // cada recurso esta associado palavras-chave
+    private ArrayList<String> palavraschave = new ArrayList();
+
     public Recurso(String titulo, String descricao, String dataCriacao, String dataRegistro) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.dataCriacao = dataCriacao;
         this.dataRegistro = dataRegistro;
     }
-
 
     public String getTitulo() {
         return titulo;
