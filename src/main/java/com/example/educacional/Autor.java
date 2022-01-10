@@ -86,4 +86,16 @@ public class Autor {
     public void setOrcid(String orcid) {
         this.orcid = orcid;
     }
+
+    @Override
+    public String toString() {
+        return "Autor{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", afiliacao='" + afiliacao + '\'' +
+                ", orcid='" + orcid + '\'' +
+                '}';
+    }
 }
