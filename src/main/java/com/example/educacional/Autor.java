@@ -27,7 +27,8 @@ public class Autor {
     @Column(length = 20)
     private String orcid;
 
-
+    @Transient
+    private Recurso recurso;
 
     public Autor() {
     }
@@ -41,6 +42,16 @@ public class Autor {
         this.afiliacao = afiliacao;
         this.orcid = orcid;
     }
+
+    public Autor(String email, String nome, String sobrenome, String afiliacao, String orcid, Recurso recurso) {
+        this.email = email;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.afiliacao = afiliacao;
+        this.orcid = orcid;
+        this.recurso = recurso;
+    }
+
 
     public Long getId() {
         return id;
@@ -101,4 +112,19 @@ public class Autor {
                 ", orcid='" + orcid + '\'' +
                 '}';
     }
+
+
+
+    // **Métodos para Associações **
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RECURSO_ID")
+
+    public Recurso getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(Recurso recurso) {
+        this.recurso = recurso;
+    }
+
 }

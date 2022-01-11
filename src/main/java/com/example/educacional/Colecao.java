@@ -2,8 +2,8 @@ package com.example.educacional;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 
@@ -20,23 +20,34 @@ public class Colecao {
     @Column(length = 4096)
     private String descricao;
 
-    // uma colecao possui uma lista ordenada de recursos
-    private List<Recurso> recursos = new List<Recurso>() {
-    };
+    private ArrayList<Evento> eventos;
 
-    public Colecao() {
-    }
+    private List<Curso> cursos = new ArrayList<Curso>();
 
-    public Colecao(String titulo, String descricao) {
+
+    // Uma COLEÇÃO está relacionada a uma lista ordenada de RECURSOS
+    private ArrayList<Recurso> recursos = new List<Recurso>();
+
+
+    public Colecao(String titulo, String descricao, ArrayList<Recurso> recursos) {
         this.titulo = titulo;
         this.descricao = descricao;
-    }
-
-    public Colecao(String titulo, String descricao, List<Recurso> recursos) {
-        this.titulo = titulo;
-        this.descricao = descricao;
+        this.eventos = eventos;
         this.recursos = recursos;
     }
+
+    public Colecao() {
+
+    }
+
+    public void adiciona(Evento evento){
+        this.eventos.add(evento);
+    }
+
+    public void adiciona(Curso curso){
+        this.cursos.add(curso);
+    }
+
 
     public Long getId() {
         return id;
@@ -70,4 +81,17 @@ public class Colecao {
                 ", descricao='" + descricao + '\'' +
                 '}';
     }
+
+    // **Métodos para Associações **
+
+    @OneToMany(mappedBy = "recurso")
+    @OrderBy
+    public List<Recurso> getRecursos(){
+        return recursos;
+    }
+
+    public void setRecursos(ArrayList<Recurso> recursos){
+        this.recursos = recursos;
+    }
+
 }

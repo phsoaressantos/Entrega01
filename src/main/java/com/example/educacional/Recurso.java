@@ -1,9 +1,7 @@
 package com.example.educacional;
 
 import javax.persistence.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 
@@ -23,16 +21,25 @@ public class Recurso {
 
     private String dataRegistro;
 
+    // um recurso possui uma lista ordenada de autores
+    private List<Autor> autores = new ArrayList<Autor>();
+
+    // cada recurso esta associado palavras-chave
+  //  private List<Palavraschave> palavraschaves = new ArrayList<Palavraschave>();
+
     public Recurso() {
     }
 
-    // um recurso possui uma lista ordenada de autores
-    private List<Autor> autores = new List<Autor>() {
-    };
 
 
-    // cada recurso esta associado palavras-chave
-    private ArrayList<String> palavraschave = new ArrayList();
+    public Colecao getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(Colecao recurso) {
+        this.recurso = recurso;
+    }
+
 
     public Recurso(String titulo, String descricao, String dataCriacao, String dataRegistro) {
         this.titulo = titulo;
@@ -40,6 +47,8 @@ public class Recurso {
         this.dataCriacao = dataCriacao;
         this.dataRegistro = dataRegistro;
     }
+
+
 
     public String getTitulo() {
         return titulo;
@@ -81,6 +90,14 @@ public class Recurso {
         this.id = id;
     }
 
+//    public ArrayList<String> getPalavraschave() {
+//        return palavraschave;
+//    }
+//
+//    public void setPalavraschave(ArrayList<String> palavraschave) {
+//        this.palavraschave = palavraschave;
+//    }
+
     @Override
     public String toString() {
         return "Recurso{" +
@@ -92,4 +109,20 @@ public class Recurso {
                 '}';
     }
 
+    // **Métodos para Associações **
+
+    @OneToMany(mappedBy = "autor")
+    @OrderBy
+
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
+    }
+
+    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "recurso_id")
+    private Colecao recurso;
 }
