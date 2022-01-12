@@ -2,8 +2,11 @@ package com.example.educacional;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+
 
 public class Autor {
 
@@ -27,8 +30,9 @@ public class Autor {
     @Column(length = 20)
     private String orcid;
 
-    @Transient
-    private Recurso recurso;
+    // um autor, varios recursos
+
+   // private List<Recurso> recursos = new ArrayList<Recurso>();
 
     public Autor() {
     }
@@ -41,15 +45,6 @@ public class Autor {
         this.sobrenome = sobrenome;
         this.afiliacao = afiliacao;
         this.orcid = orcid;
-    }
-
-    public Autor(String email, String nome, String sobrenome, String afiliacao, String orcid, Recurso recurso) {
-        this.email = email;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.afiliacao = afiliacao;
-        this.orcid = orcid;
-        this.recurso = recurso;
     }
 
 
@@ -114,17 +109,10 @@ public class Autor {
     }
 
 
-
     // **Métodos para Associações **
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RECURSO_ID")
+    @OneToMany(mappedBy = "recurso")
+    private List<Recurso> recursos;
 
-    public Recurso getRecurso() {
-        return recurso;
-    }
 
-    public void setRecurso(Recurso recurso) {
-        this.recurso = recurso;
-    }
 
 }

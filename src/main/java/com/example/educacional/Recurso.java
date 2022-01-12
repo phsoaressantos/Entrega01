@@ -1,9 +1,10 @@
 package com.example.educacional;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class Recurso {
     @Id
@@ -21,24 +22,16 @@ public class Recurso {
 
     private String dataRegistro;
 
+
     // um recurso possui uma lista ordenada de autores
-    private List<Autor> autores = new ArrayList<Autor>();
+  //  private List<Autor> autores = new ArrayList<Autor>();
 
     // cada recurso esta associado palavras-chave
-  //  private List<Palavraschave> palavraschaves = new ArrayList<Palavraschave>();
+   //private List<Palavraschave> palavraschaves = new ArrayList<Palavraschave>();
 
     public Recurso() {
     }
 
-
-
-    public Colecao getRecurso() {
-        return recurso;
-    }
-
-    public void setRecurso(Colecao recurso) {
-        this.recurso = recurso;
-    }
 
 
     public Recurso(String titulo, String descricao, String dataCriacao, String dataRegistro) {
@@ -111,18 +104,20 @@ public class Recurso {
 
     // **Métodos para Associações **
 
-    @OneToMany(mappedBy = "autor")
-    @OrderBy
-
-    public List<Autor> getAutores() {
-        return autores;
-    }
-
-    public void setAutores(List<Autor> autores) {
-        this.autores = autores;
-    }
-
-    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToOne
     @JoinColumn(name = "recurso_id")
-    private Colecao recurso;
+    private Autor recurso;
+
+
+    public Autor getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(Autor recurso) {
+        this.recurso = recurso;
+    }
+
+    @OneToMany(mappedBy = "colecao")
+    private List<Colecao> colecaos;
+
 }

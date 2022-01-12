@@ -3,6 +3,8 @@ package com.example.educacional;
 import javax.persistence.*;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "id")
+
 public class Curso extends Colecao {
 
     @Id
@@ -11,5 +13,7 @@ public class Curso extends Colecao {
     private Long id;
     private String dataRegistro;
 
+    public Curso(){
+    }
 
 }
