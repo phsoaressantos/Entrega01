@@ -7,10 +7,7 @@ import javax.persistence.*;
 
 public class Evento extends Colecao {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
+
     private String dataInicio;
     private String dataFim;
 
