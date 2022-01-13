@@ -3,6 +3,7 @@ package com.example.educacional;
 import javax.persistence.*;
 import java.util.List;
 
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 
